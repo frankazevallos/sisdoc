@@ -68,11 +68,22 @@ CREATE TABLE `password_resets` (
 DROP TABLE IF EXISTS `tram_archivador`;
 
 CREATE TABLE `tram_archivador` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `idarch` int(11) NOT NULL AUTO_INCREMENT,
+  `arch_iddependencia` int(11) DEFAULT NULL,
+  `arch_idusuario` int(11) DEFAULT NULL,
+  `arch_nombre` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `arch_periodo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `arch_idusuarioa` int(11) DEFAULT NULL,
+  `arch_estado` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`idarch`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `tram_archivador` */
+
+insert  into `tram_archivador`(`idarch`,`arch_iddependencia`,`arch_idusuario`,`arch_nombre`,`arch_periodo`,`arch_idusuarioa`,`arch_estado`,`created_at`,`updated_at`) values 
+(1,1,1,'ARCHIVADOR CONTABILIDAD','2021',NULL,1,'2021-05-13 02:14:02','2021-05-13 02:14:02');
 
 /*Table structure for table `tram_dependencia` */
 
@@ -81,7 +92,7 @@ DROP TABLE IF EXISTS `tram_dependencia`;
 CREATE TABLE `tram_dependencia` (
   `iddependencia` int(11) NOT NULL AUTO_INCREMENT,
   `depe_nombre` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `depe_abreviado` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `depe_abreviado` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `depe_siglaxp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `depe_representante` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `depe_cargo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -89,13 +100,45 @@ CREATE TABLE `tram_dependencia` (
   `depe_estado` int(11) DEFAULT NULL,
   `depe_idadmin` int(11) DEFAULT NULL,
   `depe_fecharegistro` date DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`iddependencia`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `tram_dependencia` */
 
-insert  into `tram_dependencia`(`iddependencia`,`depe_nombre`,`depe_abreviado`,`depe_siglaxp`,`depe_representante`,`depe_cargo`,`depe_tipo`,`depe_estado`,`depe_idadmin`,`depe_fecharegistro`) values 
-(1,'Contabilidad','cont','c','anthony','gerente',0,1,1,'2021-05-11');
+insert  into `tram_dependencia`(`iddependencia`,`depe_nombre`,`depe_abreviado`,`depe_siglaxp`,`depe_representante`,`depe_cargo`,`depe_tipo`,`depe_estado`,`depe_idadmin`,`depe_fecharegistro`,`created_at`,`updated_at`) values 
+(1,'Contabilidad','cont','c','anthony','gerente',1,1,1,'2021-05-11','2021-05-13 01:52:21',NULL);
+
+/*Table structure for table `tram_documento` */
+
+DROP TABLE IF EXISTS `tram_documento`;
+
+CREATE TABLE `tram_documento` (
+  `iddoc` int(11) NOT NULL AUTO_INCREMENT,
+  `docu_idorigen` int(11) DEFAULT NULL,
+  `docu_tipo` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `docu_iddependencia` int(11) DEFAULT NULL,
+  `docu_firma` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `docu_cargo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `docu_detalle` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `docu_ext_nombre` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `docu_ext_dni` int(11) DEFAULT NULL,
+  `docu_idtipodocumento` int(11) DEFAULT NULL,
+  `docu_numero_doc` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `docu_siglas_doc` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `docu_idprioridad` int(11) DEFAULT NULL,
+  `docu_folios` int(11) DEFAULT NULL,
+  `docu_asunto` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `docu_idadmin` int(11) DEFAULT NULL,
+  `docu_idusuariodependencia` int(11) DEFAULT NULL,
+  `docu_archivo` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `docu_fecharegistro` date DEFAULT NULL,
+  `docu_forma` int(11) DEFAULT NULL,
+  PRIMARY KEY (`iddoc`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `tram_documento` */
 
 /*Table structure for table `tram_operacion` */
 
@@ -106,13 +149,16 @@ CREATE TABLE `tram_operacion` (
   `oper_iddocumento` int(11) DEFAULT NULL,
   `oper_iddependencia` int(11) DEFAULT NULL,
   `oper_idadmin` int(11) DEFAULT NULL,
+  `oper_idarchivador` int(11) DEFAULT NULL,
   `oper_idtope` int(11) DEFAULT NULL,
-  `oper_forma` int(11) DEFAULT NULL,
-  `oper_depeid_d` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `oper_usuid_d` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `oper_detalledestino` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `oper_forma` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `oper_acciones` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `oper_idprocesado` int(11) DEFAULT NULL,
-  `oper_procesado` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `oper_procesado` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `oper_tarchi_id` int(11) DEFAULT NULL,
+  `oper_depeid_d` int(11) DEFAULT NULL,
+  `oper_usuid_d` int(11) DEFAULT NULL,
+  `oper_detalledestino` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `oper_fecha` date DEFAULT NULL,
   PRIMARY KEY (`idoperacion`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -128,33 +174,42 @@ CREATE TABLE `tram_prioridad` (
   `prio_descripcion` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `prio_abreviado` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `prio_estado` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`idprioridad`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `tram_prioridad` */
 
-insert  into `tram_prioridad`(`idprioridad`,`prio_descripcion`,`prio_abreviado`,`prio_estado`) values 
-(1,'Urgente','U',1),
-(2,'Emergencia','E',1),
-(3,'Normal','N',1);
+insert  into `tram_prioridad`(`idprioridad`,`prio_descripcion`,`prio_abreviado`,`prio_estado`,`created_at`,`updated_at`) values 
+(1,'URGENTE','URG',1,'2021-05-13 01:52:21','2021-05-13 01:51:18'),
+(2,'EMERGENCIA','EMR',0,'2021-05-13 01:52:21','2021-05-13 01:55:47'),
+(3,'NORMAL','NOR',1,'2021-05-13 01:52:21','2021-05-13 01:51:56'),
+(4,'INMEDIATO','INM',1,'2021-05-13 01:52:21','2021-05-13 01:52:21');
 
 /*Table structure for table `tram_tipodocumento` */
 
 DROP TABLE IF EXISTS `tram_tipodocumento`;
 
 CREATE TABLE `tram_tipodocumento` (
-  `idtipodocumento` int(11) NOT NULL AUTO_INCREMENT,
+  `idtdoc` int(11) NOT NULL AUTO_INCREMENT,
   `tdoc_descripcion` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tdoc_abreviado` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`idtipodocumento`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `tdoc_estado` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tdoc_correlativo` int(11) DEFAULT NULL,
+  `tdoc_fecha` date DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`idtdoc`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `tram_tipodocumento` */
 
-insert  into `tram_tipodocumento`(`idtipodocumento`,`tdoc_descripcion`,`tdoc_abreviado`) values 
-(1,'Solicitud','SOL'),
-(2,'Oficio','OFI'),
-(3,'Carta','CAR');
+insert  into `tram_tipodocumento`(`idtdoc`,`tdoc_descripcion`,`tdoc_abreviado`,`tdoc_estado`,`tdoc_correlativo`,`tdoc_fecha`,`created_at`,`updated_at`) values 
+(1,'SOLICITUD','SOL','1',NULL,NULL,'2021-05-13 01:52:21','2021-05-12 21:21:46'),
+(2,'OFICIO','OFI','1',NULL,NULL,'2021-05-13 01:52:21','2021-05-12 21:21:51'),
+(3,'CARTA','CAR','1',NULL,NULL,'2021-05-13 01:52:21','2021-05-12 21:21:55'),
+(4,'MEMORANDUM','MEM','1',0,'2021-05-12','2021-05-12 21:21:35','2021-05-12 21:21:35');
 
 /*Table structure for table `users` */
 
@@ -175,13 +230,19 @@ CREATE TABLE `users` (
   `adm_cargo` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `adm_tipousuario` int(11) DEFAULT NULL,
   `adm_email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `verification_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`idadmin`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
-insert  into `users`(`idadmin`,`adm_nombre`,`adm_apellido`,`adm_inicial`,`adm_dni`,`adm_cumpleanos`,`adm_telefono`,`adm_iddependencia`,`adm_sisgedo`,`password`,`adm_estado`,`adm_cargo`,`adm_tipousuario`,`adm_email`) values 
-(1,'Anthony','Zevallos','A',74032034,'1993-04-24',957503377,1,74032034,'$2y$10$Mq3UtJIsVlAoYZCJVi8b7uvfxsTVo6JtCis9lHO9GNIrnz3FS.q82',1,'GERENTE',1,'anthony@gmail.com');
+insert  into `users`(`idadmin`,`adm_nombre`,`adm_apellido`,`adm_inicial`,`adm_dni`,`adm_cumpleanos`,`adm_telefono`,`adm_iddependencia`,`adm_sisgedo`,`password`,`adm_estado`,`adm_cargo`,`adm_tipousuario`,`adm_email`,`remember_token`,`verification_token`,`created_at`,`updated_at`) values 
+(1,'ANTHONY','ZEVALLOS GUZMÁN','AZEVALLOS',74032034,'1993-04-24',957503377,1,74032034,'$2y$10$Mq3UtJIsVlAoYZCJVi8b7uvfxsTVo6JtCis9lHO9GNIrnz3FS.q82',1,'GERENTE FINANZAS',1,'superantho1993@gmail.com','ziJu0CAJVBYc1Oeq5fOaaZ2lRdfLDGtuHEGnTZbsvrmZoneAU6DyK6erbAwh','1x18qiXCHTqodOyzVp3o6NPso6g4kQIkXbxZmp30',NULL,'2021-05-13 01:57:09'),
+(2,'WILLIAM','ALBORNOZ VARGAS','WALBORNOZ',77788899,'1992-11-02',999888777,1,77788899,'$2y$10$M4FeqkrLkHwvqXsoo6iaxeEZl40z7E5mpLQruu5qr3SZcyZlpfCVu',1,'SUBGERENTE CONTABILIDAD',2,'willy@gmail.com',NULL,NULL,'2021-05-13 01:59:40','2021-05-13 01:59:40'),
+(3,'ROXANA','MENDEZ CUEVA','RMENDEZ',77799977,'2000-01-01',999999999,1,77799977,'$2y$10$bETtuKz5T1hSButIgY/LnOtBh4pnd5Ch7aYx7q85vEADGmOloHSYq',1,'GERENTE CONTABILIDAD',2,'roxana@gmail.com',NULL,NULL,'2021-05-13 02:13:01','2021-05-13 02:13:01');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
