@@ -1,0 +1,1 @@
+Sigue el link para resetear tu password {{ url('recibirpass/'.$verif_user->verification_token) }}
