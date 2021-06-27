@@ -111,7 +111,7 @@ class EnProcesoController extends Controller
 		catch(\Exception $e){
 			DB::rollBack();
 			
-			return redirect('tramite/documentos/enproceso')->with('error', 'Hubo un error al intentar crear el Documento contactece con el Administrador del Sistema');
+			return redirect('tramite/documentos/enproceso')->with('error', 'Hubo un error al intentar crear el Documento1 contactece con el Administrador del Sistema');
 		}      
         
     }

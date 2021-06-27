@@ -107,7 +107,7 @@ class AtendidosController extends Controller
 		catch(\Exception $e){
 			DB::rollBack();
 			
-			return redirect('tramite/documentos/atendidos')->with('error', 'Hubo un error al intentar crear el Documento contactece con el Administrador del Sistema');
+			return redirect('tramite/documentos/atendidos')->with('error', 'Hubo un error al intentar crear el Documento3 contactece con el Administrador del Sistema');
 		}      
         
     }

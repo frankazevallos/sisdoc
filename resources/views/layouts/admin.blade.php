@@ -88,7 +88,7 @@
                 <!--<span class="logo-mini"><b>AD</b>V</span>-->
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-mini"><i class="fa fa-globe"></i></span>
-                <span class="logo-lg" style="color: #FFFFF5;"><i class="fa fa-globe"> </i> SISDOC</span>
+                <span class="logo-lg" style="color: #FFFFF5;"><i class="fa fa-globe"> </i> SISDATA</span>
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->
@@ -99,7 +99,7 @@
                 </a>
                 <div class="collapse navbar-collapse pull-left"
                     style="padding-top: 10px; padding-left: 100px; font-size:20px; color: #FFFFF5;">
-                    <i><b>Municipalidad Distrital de Amarilis - Pachitea</b></i>
+                    <i><b>Municipalidad Distrital de Amarilis</b></i>
                 </div>
 
                 <!-- Navbar Right Menu -->
@@ -125,7 +125,8 @@
                                         {{ Auth::user()->adm_nombre }} {{ Auth::user()->adm_apellido }}
                                         <small
                                             style="font-size: x-small;">{{ Auth::user()->getdependencia->depe_nombre }}</small>
-                                        <small style="font-size: x-small;">CARGO: {{ Auth::user()->adm_cargo }}</small>
+                                        <small style="font-size: x-small;">CARGO:
+                                            {{ Auth::user()->adm_cargo }}</small>
                                     </p>
 
                                 </li>
@@ -254,10 +255,10 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                {!! Form::open(['url' => 'tramite/buscar/documento', 'method' => 'POST', 'class' => 'sidebar-form']) !!} {{ csrf_field() }}
+                {!! Form::open(['url' => 'tramite/buscar/documento', 'method' => 'POST', 'class' => 'sidebar-form', 'style' => 'border:none;']) !!} {{ csrf_field() }}
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
-                    <img style="margin-left:35px;" src="{{ asset('dist/img/molino.png') }}" width="120px">
+                    <img style="margin-left:35px;" src="{{ asset('dist/img/muniescudo.png') }}" width="120px">
                 </div>
                 {!! Form::close() !!}
                 <!-- search form -->
@@ -444,12 +445,23 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="{{ url('tramite/administracion/entidadesext') }}"><i
-                                        class="fa fa-circle-o text-green"></i> Entidades Externas</a>
+                                        class="fa fa-circle-o text-green"></i> Entidades Ext. / Ciudadano</a>
                                 <!-- <ul class="treeview-menu">
                                     <li><a href="{{ url('tramite/administracion/entidadesext') }}"><i class="fa fa-circle-o text-green"></i> Buscar</a></li>
                                     <li><a href="{{ url('tramite/administracion/entidadesext/create') }}"><i class="fa fa-circle-o text-green"></i> Nuevo</a></li>
                                 </ul> -->
                             </li>
+                            {{-- agreagar item cudadano --}}
+                            {{-- <li><a href="{{ url('tramite/administracion/ciudadano') }}"><i
+                                        class="fa fa-circle-o text-green"></i> Ciudadano</a>
+                                <!-- <ul class="treeview-menu">
+                                    <li><a href="{{ url('tramite/administracion/entidadesext') }}"><i class="fa fa-circle-o text-green"></i> Buscar</a></li>
+                                    <li><a href="{{ url('tramite/administracion/entidadesext/create') }}"><i class="fa fa-circle-o text-green"></i> Nuevo</a></li>
+                                </ul> -->
+                            </li> --}}
+
+
+
                             @if (Auth::user()->idadmin == 1)
                                 <li><a href="{{ url('tramite/administracion/unidadesorg') }}"><i
                                             class="fa fa-circle-o text-green"></i> Unidades Orgánicas</a>
@@ -505,21 +517,23 @@
 
         <!--Contenido-->
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper" style="background-image: url({{ asset('dist/img/bodyfond.jpg') }});">
+        {{-- <div class="content-wrapper" style="background-image: url({{ asset('dist/img/bodyfond.jpg') }});"> --}}
+        <div class="content-wrapper" style="background-color: #f3f1f1;">
             @if (Session::has('msg2'))
                 <div class="alert alert-warning alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h4> <i class="glyphicon glyphicon-ok-circle"></i> ATENCIÓN!</h4> {{ Session::get('msg2') }}
+                    <h4> <i class="glyphicon glyphicon-ok-circle"></i> ATENCI&Oacute;N!</h4>
+                    {{ Session::get('msg2') }}
                 </div>
             @endif
             @yield('contenido')
         </div>
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>SISDOC</b> | sistemas_bek11@hotmail.com
+                <b>SISDATA</b> | sistemas_bek11@hotmail.com
             </div>
-            <strong> Municipalidad Distrtal de Molino <a href="{{ url('tramite') }}"> SISDOC | 1.0</a>.</strong>
-            Sistema Documentaria.
+            <strong> Municipalidad Distrtal de Amarilis <a href="{{ url('tramite') }}"> SISDATA | 1.0</a>.</strong>
+            Sistema de Gesti&oacute;n Documental.
         </footer>
         <!-- /.col -->
     </div>

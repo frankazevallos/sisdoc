@@ -32,7 +32,7 @@ class LoginController extends Controller
 		if (Auth::attempt(['adm_sisgedo' => $request->email, 'password' => $request->password])) {        
             return redirect()->intended('tramite');
         }else{            
-			return redirect('login')->with('error_message', 'EL USUARIO O PASSWORD SON ERRONEOS, INTENTE DE NUEVO.');
+			return redirect('login')->with('error_message', 'Usuario o contraseña incorrectos. Intente de nuevo.');
 		}
 	}
 
@@ -60,7 +60,7 @@ class LoginController extends Controller
 						
 			
 			if(!$rest){
-				return redirect('olvidar')->with('restaurar_error', 'No se encontro ningun Usuario con los datos ingresados, vuelva a intertar');
+				return redirect('olvidar')->with('restaurar_error', 'No se encontró ningun Usuario con los datos ingresados. Intente de nuevo.');
 			}
 			else{
 				$email = $rest->adm_email;	
@@ -72,11 +72,11 @@ class LoginController extends Controller
 				DB::commit();
 				
 				Mail::send('tramite.login.email', ['verif_user' => $verif_user], function($msj) use ($email) {
-					$msj->subject('Municipalidad de Cholon: Petición para Restablecer su Contraseña');
+					$msj->subject('Municipalidad Distrital de Amarilis: Solicitud para restablecer su contraseña');
 					$msj->to($email);
 				});
 
-				return redirect('enviar')->with('restaurar', 'SGDoc: Se envio un Link para reestablecer su contraseña a su correo electrónico: '.$rest->adm_email);
+				return redirect('enviar')->with('restaurar', 'SISDATA: Se envió un link para restablecer su contraseña a su correo electrónico: '.$rest->adm_email);
 			}
 						
 		// }

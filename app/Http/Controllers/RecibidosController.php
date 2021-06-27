@@ -136,7 +136,7 @@ class RecibidosController extends Controller
 		catch(\Exception $e){
 			DB::rollBack();
 			
-			return redirect('tramite/documentos/recibidos')->with('error', 'Hubo un error al intentar crear el Documento contactece con el Administrador del Sistema');
+			return redirect('tramite/documentos/recibidos')->with('error', 'Hubo un error al intentar crear el Documento4 contactece con el Administrador del Sistema');
 		}      
         
     }

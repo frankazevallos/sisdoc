@@ -89,14 +89,14 @@
         <header class="main-header">
             <!-- Logo -->
             <a href="{{url('tramite')}}" class="logo">
-                <span class="logo-lg" style="color: #FFFFF5;"><i class="fa fa-globe"> </i> SISDOC</span>
+                <span class="logo-lg" style="color: #FFFFF5;"><i class="fa fa-globe"> </i> SISDATA</span>
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
                                 
                 <div class="collapse navbar-collapse pull-left" style="padding-top: 10px; padding-left: 160px; font-size:20px; color: #FFFFF5;">  
-                    <i><b>Municipalidad Distrital de Molino - Pachitea </b></i>               
+                    <i><b>Municipalidad Distrital de Amarilis </b></i>               
                 </div>
                 
                 <!-- Navbar Right Menu -->
@@ -148,7 +148,8 @@
                 </div>
             </nav>
         </header>   
-    	<div class="content" style="background-image: url({{asset('dist/img/bodyfond.jpg')}}); width: 100%; height: 100%; position: absolute;">  
+    	{{-- <div class="content" style="background-image: url({{asset('dist/img/bodyfond.jpg')}}); width: 100%; height: 100%; position: absolute;">  --}}
+				<div class="content" style="background-color: #f3f1f1; width: 100%; height: 100%; position: absolute;"> 
 			<br><br>
 			<!-- Content Header (Page header) -->
 			<section class="content-header col-xs-10 col-sm-10 col-md-10 col-lg-10 col-md-offset-1 col-sm-offset-1 col-lg-offset-1">				
@@ -234,9 +235,9 @@
 		
 		<footer class="main-footer">
             <div class="pull-right hidden-xs">
-              <b>SISDOC</b> | sistemas_bek11@hotmail.com
+              
             </div>
-            <strong>Municipalidad Distrtal de Molino <a href="{{url('tramite')}}"> SISDOC | 1.0</a>.</strong> Sistema Documentaria.
+            <strong>Municipalidad Distrtal de Amarilis <a href="{{url('tramite')}}"> SISDATA | 1.0</a>.</strong> Sistema Documentaria.
         </footer>
 
 	<!-- jQuery 2.1.4 -->
